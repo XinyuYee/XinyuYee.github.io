@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Xinyu Ye</title>
+<meta name="description" content="Xinyu Ye, Postdoctoral Researcher at UNC Chapel Hill. LLM agents, verification and test-time scaling, recursive self-improvement.">
+<link rel="icon" href="img/avatar.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: centered 1000px column. Sticky profile on the left, one reading column on the right. No cards, only whitespace. */
+:root{
+  --bg:#ffffff; --fg:#1d2327; --muted:#5d6a70; --faint:#e5e9e7; --accent:#2e5e4e; --thumb:#f1f4f2; --thumb-ink:#7f948b;
+  --f-text:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --f-util:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141816;--fg:#e3e8e5;--muted:#97a49e;--faint:#2a312d;--accent:#8cc3ad;--thumb:#1d2320;--thumb-ink:#6f857b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141816;--fg:#e3e8e5;--muted:#97a49e;--faint:#2a312d;--accent:#8cc3ad;--thumb:#1d2320;--thumb-ink:#6f857b;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-text);font-size:16.5px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+img{max-width:100%}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.page{max-width:1000px;margin:0 auto;padding-block:64px 80px;display:grid;grid-template-columns:210px minmax(0,1fr);gap:64px}
+aside{position:sticky;top:48px;align-self:start;display:flex;flex-direction:column;gap:14px}
+.photo{width:150px;height:150px;border-radius:50%;object-fit:cover;object-position:50% 30%;max-width:100%}
+.name{font-size:26px;font-weight:600;line-height:1.2;margin:4px 0 2px}
+.role{color:var(--muted);font-size:15px;line-height:1.5;margin:0}
+.email{font-family:var(--f-util);font-size:12.5px;color:var(--muted);margin:2px 0 0;user-select:all}
+.links{list-style:none;padding:0;margin:4px 0 0;display:flex;flex-direction:column;gap:5px;font-size:15px}
+.links a{display:inline-flex;gap:9px;align-items:center;color:var(--fg)}
+.links a:hover{color:var(--accent)}
+.links svg{width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+main{display:flex;flex-direction:column;gap:52px;min-width:0}
+section{display:flex;flex-direction:column;gap:16px}
+h2{font-size:22px;font-weight:600;margin:0;color:var(--accent)}
+h3{font-size:15px;font-weight:600;margin:8px 0 0;color:var(--muted);font-family:var(--f-util);letter-spacing:.04em}
+p{margin:0;max-width:68ch}
+.note{font-size:14px;color:var(--muted)}
+
+.news{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 22px}
+.news li{display:contents}
+.news time{font-family:var(--f-util);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:3px;white-space:nowrap}
+
+.pubs{display:flex;flex-direction:column;gap:30px}
+.pub{display:grid;grid-template-columns:190px minmax(0,1fr);gap:24px;align-items:start}
+.thumb{width:100%;max-width:100%;aspect-ratio:16/10;object-fit:contain;background:#fff;border-radius:3px;display:block;padding:4px}
+.tile{display:grid;place-items:center;font-style:italic;font-size:20px;color:var(--thumb-ink)}
+.venue{font-family:var(--f-util);font-size:12px;letter-spacing:.04em;color:var(--accent)}
+.ptitle{font-weight:600;font-size:17px;line-height:1.4;margin:2px 0 4px}
+.authors{font-size:15px;color:var(--muted);line-height:1.5}
+.authors b{color:var(--fg);font-weight:600}
+.plinks{margin-top:6px;font-size:15px;display:flex;flex-wrap:wrap;gap:2px 16px}
+
+.plist{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;font-size:15.5px}
+.plist .t{font-weight:600}
+.plist .a{color:var(--muted)}
+.plist .a b{color:var(--fg)}
+.plist .v{font-style:italic}
+
+.rows{display:flex;flex-direction:column;gap:14px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px}
+.row .what{font-weight:600}
+.row .sub{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:68ch}
+.row .when{font-family:var(--f-util);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:3px;white-space:nowrap}
+
+footer{font-size:13px;color:var(--muted)}
+
+@media (max-width:760px){
+  .page{grid-template-columns:1fr;gap:40px;padding-block:32px 56px}
+  aside{position:static;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 18px;align-items:center}
+  .photo{width:96px;height:96px;grid-row:span 2}
+  .links{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;gap:6px 16px;margin-top:10px}
+  .pub{grid-template-columns:1fr;gap:12px}
+  .thumb{max-width:340px}
+  .row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <aside>
+    <img class="photo" src="img/avatar.jpg" alt="Xinyu Ye">
+    <div>
+      <p class="name">Xinyu Ye</p>
+      <p class="role">Postdoctoral Researcher<br>Computer Science, UNC Chapel Hill</p>
+      <p class="email">xinyuye [at] cs.unc.edu</p>
+    </div>
+    <ul class="links">
+      <li><a href="https://scholar.google.com/citations?user=fdwhd9gAAAAJ"><svg viewBox="0 0 24 24"><path d="M12 3 2 9l10 6 10-6-10-6Z"/><path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5"/></svg>Google Scholar</a></li>
+      <li><a href="https://github.com/XinyuYee"><svg viewBox="0 0 24 24"><path d="M9 19c-4 1.5-4-2-6-2.5M15 21v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.6 11.6 0 0 0-6 0C6.8 2.8 5.8 3.1 5.8 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>GitHub</a></li>
+      <li><a href="https://rsi-exam.ai/"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>RSI-Exam</a></li>
+    </ul>
+  </aside>
+
+  <main>
+    <section id="about">
+      <h2>About Me</h2>
+      <p>I am a Postdoctoral Researcher in the Department of Computer Science at UNC Chapel Hill, working with Prof. <a href="https://www.huaxiuyao.io/">Huaxiu Yao</a>. My research focuses on self-improving AI agents, including autonomous research agents, benchmarks for recursive self-improvement, and test-time scaling and verification.</p>
+      <p>I received my Ph.D. from Shanghai Jiao Tong University in 2025, advised by Prof. <a href="https://thinklab.sjtu.edu.cn/">Junchi Yan</a>, where I worked on quantum machine learning and graph learning for combinatorial optimization. I received my B.S. from Wuhan University, advised by Prof. Jiayi Ma, where I worked on image feature matching and visual place recognition.</p>
+    </section>
+
+    <section id="news">
+      <h2>News</h2>
+      <ul class="news">
+        <li><time>2026.09</time><span><a href="#src">SRC</a>, our execution-free verifier for agent test-time scaling, is accepted to NeurIPS 2026.</span></li>
+        <li><time>2026.08</time><span>We released <a href="https://rsi-exam.ai/">RSI-Exam</a>, a benchmark for recursive self-improvement through executable research.</span></li>
+        <li><time>2026.03</time><span>I joined UNC Chapel Hill as a Postdoctoral Researcher.</span></li>
+        <li><time>2025.07</time><span>I joined ByteDance (TikTok).</span></li>
+        <li><time>2025.06</time><span>I received my Ph.D. from Shanghai Jiao Tong University.</span></li>
+      </ul>
+    </section>
+
+    <section id="publications">
+      <h2>Selected Publications</h2>
+      <p class="note">* equal contribution, &dagger; corresponding author. Full list on <a href="https://scholar.google.com/citations?user=fdwhd9gAAAAJ">Google Scholar</a>.</p>
+      <div class="pubs">
+        <article class="pub" id="src">
+          <img class="thumb" src="img/src.jpg" alt="SRC overview">
+          <div>
+            <div class="venue">NeurIPS 2026</div>
+            <p class="ptitle">See, Read, Compare: Candidate-Aware Verification for Agent Test-Time Scaling</p>
+            <div class="authors"><b>Xinyu Ye</b>, Yongliang Wu, Xingyu Zhu, Peng Xia, Huaijin Wu, Yehui Tang, Rui Ye, Hao Xiong, Junchi Yan, Huaxiu Yao</div>
+            <div class="plinks"><a href="https://github.com/XinyuYee/see-read-compare">Code</a></div>
+          </div>
+        </article>
+
+        <article class="pub" id="rsi">
+          <img class="thumb" src="img/rsi.jpg" alt="RSI-Exam">
+          <div>
+            <div class="venue">Benchmark 2026</div>
+            <p class="ptitle">RSI-Exam: Benchmarking Recursive Self-Improvement through Executable Research</p>
+            <div class="authors"><b>Xinyu Ye</b> and the RSI-Exam Team</div>
+            <div class="authors">88 research tasks across six domains. An agent spends hours improving a method or a harness, then gets one final run on a hidden test set.</div>
+            <div class="plinks"><a href="https://rsi-exam.ai/">Website</a><a href="https://github.com/aiming-lab/RSI-Exam">Code</a></div>
+          </div>
+        </article>
+
+        <article class="pub">
+          <img class="thumb" src="img/evolvemem.jpg" alt="EvolveMem architecture">
+          <div>
+            <div class="venue">arXiv 2026</div>
+            <p class="ptitle">EvolveMem: Self-Evolving Memory Architecture via AutoResearch for LLM Agents</p>
+            <div class="authors">Jiaqi Liu, <b>Xinyu Ye</b>&dagger;, Peng Xia, Zeyu Zheng, Cihang Xie, Mingyu Ding, Huaxiu Yao&dagger;</div>
+            <div class="plinks"><a href="https://arxiv.org/abs/2605.13941">arXiv</a></div>
+          </div>
+        </article>
+
+        <article class="pub">
+          <img class="thumb" src="img/qgnn.jpg" alt="GQGLA architecture">
+          <div>
+            <div class="venue">ICLR 2025</div>
+            <p class="ptitle">On Designing General and Expressive Quantum Graph Neural Networks with Applications to MILP Instance Representation</p>
+            <div class="authors"><b>Xinyu Ye</b>, Hao Xiong, J. Huang, Z. Chen, J. Wang, Junchi Yan</div>
+            <div class="plinks"><a href="https://proceedings.iclr.cc/paper_files/paper/2025/hash/ab59d149fc0c2c9039d3e3049f7914b1-Abstract-Conference.html">Paper</a></div>
+          </div>
+        </article>
+
+        <article class="pub">
+          <img class="thumb" src="img/qem.jpg" alt="QEM graph transformer pipeline">
+          <div>
+            <div class="venue">ICLR 2025</div>
+            <p class="ptitle">Beyond Circuit Connections: A Non-Message Passing Graph Transformer Approach for Quantum Error Mitigation</p>
+            <div class="authors">T. Bao*, <b>Xinyu Ye</b>*, H. Ruan, C. Liu, W. Wu, Junchi Yan</div>
+            <div class="plinks"><a href="https://proceedings.iclr.cc/paper_files/paper/2025/hash/c276c3303c0723c83a43b95a44a1fcbf-Abstract-Conference.html">Paper</a></div>
+          </div>
+        </article>
+
+        <article class="pub">
+          <img class="thumb" src="img/qvae.jpg" alt="QVAE-Mole pipeline">
+          <div>
+            <div class="venue">NeurIPS 2024</div>
+            <p class="ptitle">QVAE-Mole: The Quantum VAE with Spherical Latent Variable Learning for 3-D Molecule Generation</p>
+            <div class="authors">Huaijin Wu*, <b>Xinyu Ye</b>*, Junchi Yan</div>
+            <div class="plinks"><a href="https://papers.nips.cc/paper_files/paper/2024/hash/286e7ab0ce6a68282394c92361c27b57-Abstract-Conference.html">Paper</a></div>
+          </div>
+        </article>
+
+        <article class="pub">
+          <img class="thumb" src="img/qip.jpg" alt="Quantum inner product">
+          <div>
+            <div class="venue">CVPR 2024</div>
+            <p class="ptitle">Circuit Design and Efficient Simulation of Quantum Inner Product and Empirical Studies of Its Effect on Near-Term Hybrid Quantum-Classic Machine Learning</p>
+            <div class="authors">Hao Xiong*, Yehui Tang*, <b>Xinyu Ye</b>*, Junchi Yan</div>
+            <div class="plinks"><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Xiong_Circuit_Design_and_Efficient_Simulation_of_Quantum_Inner_Product_and_CVPR_2024_paper.pdf">Paper</a></div>
+          </div>
+        </article>
+
+        <article class="pub">
+          <img class="thumb" src="img/qap.jpg" alt="Quantum QAP solver overview">
+          <div>
+            <div class="venue">ICML 2023</div>
+            <p class="ptitle">Towards Quantum Machine Learning for Constrained Combinatorial Optimization: a Quantum QAP Solver</p>
+            <div class="authors"><b>Xinyu Ye</b>, Ge Yan, Junchi Yan</div>
+            <div class="plinks"><a href="https://proceedings.mlr.press/v202/ye23g.html">Paper</a></div>
+          </div>
+        </article>
+
+        <article class="pub">
+          <img class="thumb" src="img/vqne.jpg" alt="VQNE overview">
+          <div>
+            <div class="venue">KDD 2023</div>
+            <p class="ptitle">VQNE: Variational Quantum Network Embedding with Application to Network Alignment</p>
+            <div class="authors"><b>Xinyu Ye</b>, Ge Yan, Junchi Yan</div>
+            <div class="plinks"><a href="https://dl.acm.org/doi/10.1145/3580305.3599542">Paper</a></div>
+          </div>
+        </article>
+
+        <article class="pub">
+          <img class="thumb" src="img/tii.jpg" alt="NMP overview">
+          <div>
+            <div class="venue">IEEE TII 2022</div>
+            <p class="ptitle">Neighborhood Manifold Preserving Matching for Visual Place Recognition</p>
+            <div class="authors"><b>Xinyu Ye</b>, Jiayi Ma</div>
+            <div class="plinks"><a href="https://doi.org/10.1109/TII.2022.3216619">Paper</a></div>
+          </div>
+        </article>
+
+        <article class="pub">
+          <img class="thumb" src="img/tgrs.jpg" alt="Motion consistency illustration">
+          <div>
+            <div class="venue">IEEE TGRS 2021</div>
+            <p class="ptitle">Local Affine Preservation with Motion Consistency for Feature Matching of Remote Sensing Images</p>
+            <div class="authors"><b>Xinyu Ye</b>, Jiayi Ma, Huilin Xiong</div>
+            <div class="plinks"><a href="https://doi.org/10.1109/TGRS.2021.3128292">Paper</a></div>
+          </div>
+        </article>
+
+        <article class="pub">
+          <img class="thumb" src="img/icra.jpg" alt="LAP overview">
+          <div>
+            <div class="venue">ICRA 2021</div>
+            <p class="ptitle">Visual Place Recognition via Local Affine Preserving Matching</p>
+            <div class="authors"><b>Xinyu Ye</b>, Jiayi Ma</div>
+            <div class="plinks"><a href="https://doi.org/10.1109/ICRA48506.2021.9561709">Paper</a></div>
+          </div>
+        </article>
+      </div>
+
+      <h3>OTHER PUBLICATIONS</h3>
+      <ul class="plist">
+        <li><span class="t">On the Generalization of SFT: A Reinforcement Learning Perspective with Reward Rectification.</span> <span class="a">Y. Wu, Y. Zhou, Z. Zhou, Y. Peng, <b>X. Ye</b>, X. Hu, W. Zhu, L. Qi, M.-H. Yang.</span> <span class="v">ICLR 2026.</span></li>
+        <li><span class="t">KRIS-Bench: Benchmarking Next-Level Intelligent Image Editing Models.</span> <span class="a">Y. Wu, Z. Li, X. Hu, <b>X. Ye</b>, X. Zeng, G. Yu, W. Zhu, B. Schiele, M.-H. Yang, X. Yang.</span> <span class="v">NeurIPS 2025.</span></li>
+        <li><span class="t">Representation Steering via Null-space Alignment for Concept Unlearning in Diffusion Models.</span> <span class="a">Y. Hao, C. He, S. Wang, Y. Wu, <b>X. Ye</b>, X. Zhu, J. Zhang, M. Wang.</span> <span class="v">ACM MM 2026.</span></li>
+        <li><span class="t">AutoResearchClaw: Self-Reinforcing Autonomous Research with Human-AI Collaboration.</span> <span class="a">J. Liu, S. Qiu, M. Li, B. Li, H. Ji, S. Han, <b>X. Ye</b>, et al.</span> <span class="v">arXiv 2026.</span> <a href="https://arxiv.org/abs/2605.20025">arXiv</a></li>
+        <li><span class="t">ClawArena-Team: Benchmarking Subagent Orchestration and Dynamic Workflows in Language-Model Agents.</span> <span class="a">K. Xiong, H. Ji, S. Qiu, Z. Zheng, C. Xie, <b>X. Ye</b>, H. Yao.</span> <span class="v">arXiv 2026.</span> <a href="https://arxiv.org/abs/2606.31174">arXiv</a></li>
+        <li><span class="t">CoHARL: Co-Evolving Agent Policies and Executable Harnesses with Reinforcement Learning.</span> <span class="a">J. Chen, P. Xia, K. Zeng, S. Han, Z. Zhang, C. Fleming, <b>X. Ye</b>, H. Yao.</span> <span class="v">arXiv 2026.</span> <a href="https://arxiv.org/abs/2610.36469">arXiv</a></li>
+        <li><span class="t">Alignment Tipping Process: How Self-Evolution Pushes LLM Agents off the Rails.</span> <span class="a">S. Han, K. Xiong, J. Liu, <b>X. Ye</b>, et al.</span> <span class="v">arXiv 2025.</span> <a href="https://arxiv.org/abs/2510.04860">arXiv</a></li>
+        <li><span class="t">QEM-Bench: Benchmarking Learning-based Quantum Error Mitigation and QEMFormer as a Multi-ranged Context Learning Baseline.</span> <span class="a">T. Bao, R. Zhong, <b>X. Ye</b>, Y. Tang, J. Yan.</span> <span class="v">ICML 2025.</span></li>
+        <li><span class="t">Tensor Network: From the Perspective of AI4Science and Science4AI.</span> <span class="a">J. Yan, Y. Tang, <b>X. Ye</b>, H. Xiong, et al.</span> <span class="v">IJCAI 2025.</span></li>
+        <li><span class="t">Loop-Closure Detection Using Local Relative Orientation Matching.</span> <span class="a">J. Ma, <b>X. Ye</b>, H. Zhou, X. Mei, F. Fan.</span> <span class="v">IEEE T-ITS 2021.</span></li>
+      </ul>
+    </section>
+
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="rows">
+        <div class="row"><span class="what">UNC Chapel Hill, Postdoctoral Researcher</span><span class="when">2026.03 – now</span><span class="sub">LLM agents, verification, recursive self-improvement.</span></div>
+        <div class="row"><span class="what">ByteDance (TikTok)</span><span class="when">2025.07 – 2026.03</span><span class="sub">Research intern, then full-time.</span></div>
+        <div class="row"><span class="what">RedNote (Xiaohongshu), Research Intern</span><span class="when">2024.06 – 2024.08</span><span class="sub">Built a GNN-based full-domain retrieval system for recommendation, from graph construction to distributed LightGCN training and GPU item-to-item inference.</span></div>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <div class="rows">
+        <div class="row"><span class="what">Shanghai Jiao Tong University, Ph.D.</span><span class="when">2020.09 – 2025.06</span><span class="sub">Electronic Information Engineering. Advisor: Prof. Junchi Yan. GPA top 2%.</span></div>
+        <div class="row"><span class="what">Wuhan University, B.S.</span><span class="when">2016.09 – 2020.04</span><span class="sub">Electronic Information Engineering. Advisor: Prof. Jiayi Ma. GPA top 3%. Excellent Graduation Thesis, Excellent Graduate.</span></div>
+      </div>
+    </section>
+
+    <footer>Last updated November 2026.</footer>
+  </main>
+</div>
+</body>
+</html>
