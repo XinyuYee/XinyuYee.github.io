@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://xinyuyee.github.io/sitemap.xml
